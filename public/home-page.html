@@ -1,0 +1,117 @@
+<html>
+<head>
+<title>Utah City Pollution Monitor</title>
+<link rel="stylesheet" href="main.css">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+<script>
+$(document).ready(function() {
+$( "#cityField" ).keyup(function() {
+  var url = "/getcity?q="+$("#cityField").val();
+$.getJSON(url,function(data) {
+    var everything;
+    everything = "<ul>";
+    $.each(data, function(i,item) {
+      everything += "<li> "+data[i].city;
+    });
+    everything += "</ul>";
+    $("#txtHint").html(everything);
+  })
+  .done(function() { console.log('getJSON request succeeded!'); })
+  .fail(function(jqXHR, textStatus, errorThrown) { 
+    console.log('getJSON request failed! ' + textStatus); 
+    console.log("incoming "+jqXHR.responseText);
+  })
+  .always(function() { console.log('getJSON request ended!');
+  })
+  .complete(function() { console.log("complete"); });
+});
+$("#weatherButton").click(function(e){
+  var value = $("#cityField").val();
+  console.log(value);
+  e.preventDefault();
+$("#displayCity").text(value);
+var myurl= "http://api.airvisual.com/v2/city?city=";
+var info = "&state=Utah&country=USA&key=f8QHhhr7EKMXQxmEs";
+  myurl += value;
+  myurl += info;
+  console.log(myurl);
+
+/////////////////////////
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": myurl,
+  "method": "GET",
+  "headers": {}
+}
+
+$.ajax(settings).done(function (response) {
+
+   
+	var search_results = "<ul>";
+              
+ 		 $.each(response, function(i,item)
+              { 
+			if (response[i] !== "success")
+				{            
+                search_results += "<li>";
+                search_results += "<div><strong>City: </strong>" + $("#cityField").val() + "</div>";
+                search_results += "<div><strong>State: </strong>" + response['data'].state + "</div>";
+                search_results += "<div><strong>Air Quality Index: </strong>" + response['data']['current']['pollution'].aqius + "</div>";
+                search_results += "<div><strong>Main Pollutant: </strong>" + response['data']['current']['pollution'].mainus + "</div>";
+                search_results += "</li><br>";
+
+		/////////////////////////////////////////////////
+		 var numResult = response['data']['current']['pollution'].aqius;
+         if(numResult >=0 && numResult <=30) {
+             document.body.style.backgroundColor = "lightgreen";
+         } else if (numResult >=31 && numResult <=60) {
+             document.body.style.backgroundColor = "olive";
+         } else if (numResult >=61 && numResult <=90) {
+             document.body.style.backgroundColor = "yellow";
+         } else if (numResult >=91 && numResult <=120) {
+             document.body.style.backgroundColor = "orange";
+         } else if (numResult >=121 && numResult <=250) {
+             document.body.style.backgroundColor = "red";
+         } else if (numResult > 250) {
+	     document.body.style.backgroundColor = "red";
+	 }
+		
+		///////////////////////////////////////////////
+				}
+              });
+              search_results += "</ul>";
+	      search_results += "<ul> Key: (p2 = pm2.5)</ul>";
+              search_results += "<ul> (p1 = pm10)</ul>";
+	      search_results += "<ul> (o3 = Ozone)</ul>";
+	      search_results += "<ul> (n2 = Nitrogen dioxide)</ul>";
+	      search_results += "<ul> (s2 = Sulfur dioxide)</ul>";
+	      search_results += "<ul> (co = Carbon monoxide)</ul>";
+              $("#weather").html(search_results);
+
+
+  console.log(response);
+});
+
+
+///////////////////////
+ 
+});
+
+        });
+</script>
+
+
+</head>
+<body>
+<h1>Utah City Pollution Monitor</h1>
+<form>
+Enter A Utah City: <input type="text" id="cityField" value=""><br>
+List of Available Cities: <span id="txtHint">Empty</span>
+<input id="weatherButton" type="submit" value="Submit">
+</form>
+<p>Current Pollution Level</p>
+<div id="weather">No Pollution Information</div>
+</body>
+</html>

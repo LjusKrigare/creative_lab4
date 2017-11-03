@@ -1,0 +1,114 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+
+#cityField {
+	width:550px;
+        margin:left;
+        margin-bottom: 15px;
+        display:block;
+        background: cornsilk;
+        padding:20px 15px;
+        border-radius:20px;
+        border: solid 3px chartreuse;
+
+}
+
+#txtHint {
+        width:550px;
+        margin: left;
+        margin-bottom: 15px;
+        display:block;
+        background: cornsilk;
+        padding:20px 15px;
+        border-radius:20px;
+        border: solid 3px chartreuse;
+        font-size: 200%;
+
+}
+
+#weatherButton {
+ width: 150px;
+ display: block;
+ margin-bottom: 10px;
+ margin-left: 20px;
+}
+
+#displayCity {
+        width:550px;
+        margin:left;
+        margin-bottom: 15px;
+        display:block;
+        background: cornsilk;
+        padding:20px 15px;
+        border-radius:20px;
+        border: solid 3px chartreuse;
+
+}
+
+#weather {
+        width:550px;
+        margin:left;
+        margin-bottom: 15px;
+        display:block;
+        background: cornsilk;
+        padding:20px 15px;
+        border-radius:20px;
+        border: solid 3px chartreuse;
+        font-size: 200%;
+
+}
+
+#searchWord {
+	width:550px;
+        margin:left;
+        margin-bottom: 15px;
+        display:block;
+        background: cornsilk;
+        padding:20px 15px;
+        border-radius:20px;
+        border: solid 3px chartreuse;
+
+}
+
+
+#searchButton {
+ width: 150px;
+ display: block;
+ margin-bottom: 10px;
+}
+
+
+#searchResults {
+        width:550px;
+        margin:left;
+        margin-bottom: 15px;
+        display:block;
+        background: cornsilk;
+        padding:20px 15px;
+        border-radius:20px;
+        border: solid 3px chartreuse;
+}
+
+h1 {
+   margin:left;
+   font-size: 300%;
+   text-decoration: underline;
+
+}
+
+p {
+
+   margin:left;
+   font-size: 200%;
+
+}
+
+form {
+    margin:left;
+   font-size: 150%;
+
+
+}
